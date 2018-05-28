@@ -1,0 +1,39 @@
+FROM python:3.6-alpine3.7
+
+ENV PYTHONUNBUFFERED=1
+
+ENV APP_USER=kaa
+ENV HOME="/home/${APP_USER}"
+
+ARG UID=1000
+ARG GID=1000
+
+ARG CWD="${HOME}/app"
+
+ENV PYTHONPATH="${CWD}/src"
+
+ARG PIPENV_FLAGS="--dev --deploy"
+
+RUN addgroup -g "${GID}" -S "${APP_USER}" && \
+    adduser -u "${UID}" -G "${APP_USER}" -h "${HOME}" -S "${APP_USER}"
+
+RUN apk add --update --no-cache openssl ca-certificates
+
+WORKDIR "${CWD}"
+
+COPY Pipfile* "${CWD}/"
+
+# The symlink is a temporary workaround for a bug in pipenv.
+# Still present as of pipenv==11.10.0.
+RUN set -eux \
+    && ln -sf /usr/local/bin/python /bin/python \
+    && apk add --no-cache --virtual .build-deps \
+        g++ \
+    && pip install --upgrade pip setuptools wheel pipenv==11.10.0 \
+    && pipenv install --system ${PIPENV_FLAGS} \
+    && rm -rf /root/.cache/pip \
+    && apk del .build-deps
+
+COPY . "${CWD}/"
+
+RUN chown -R "${APP_USER}:${APP_USER}" "${CWD}"
