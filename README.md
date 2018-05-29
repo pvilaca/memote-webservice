@@ -1,7 +1,7 @@
 # Memote Webservice
 
 ![master Branch](https://img.shields.io/badge/branch-master-blue.svg)
-[![master Build Status](https://travis-ci.org/opencobra/memote-webservice.svg?branch=master)](https://travis-ci.org/opencobra/memote-webservice)
+[![master Build Status](https://travis-ci.org/pvilaca/memote-webservice.svg?branch=master)](https://travis-ci.org/pvilaca/memote-webservice)
 [![master Codecov](https://codecov.io/gh/opencobra/memote-webservice/branch/master/graph/badge.svg)](https://codecov.io/gh/opencobra/memote-webservice/branch/master)
 [![master Requirements Status](https://requires.io/github/opencobra/memote-webservice/requirements.svg?branch=master)](https://requires.io/github/opencobra/memote-webservice/requirements/?branch=master)
 
