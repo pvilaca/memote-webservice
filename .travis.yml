@@ -10,8 +10,8 @@ services:
 env:
   global:
     - IMAGE_TAG=travis-ci-test
-    - DEV_IMAGE=opencobra/memote-webservice:${IMAGE_TAG}
-    - PROD_IMAGE=opencobra/memote-webservice:travis-ci-prod
+    - DEV_IMAGE=pvilaca/memote-webservice:${IMAGE_TAG}
+    - PROD_IMAGE=pvilaca/memote-webservice:travis-ci-prod
   matrix:
     - TARGET=test-travis
     - TARGET=pipenv-check
